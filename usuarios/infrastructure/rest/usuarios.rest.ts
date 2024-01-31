@@ -7,6 +7,7 @@ import UsuarioRepository from "../../domain/usuarios.repository";
 //implementations
 import UsuarioRepositoryPostgres from "../db/usuarios.repository.postgres";
 import Usuario from "../../domain/Usuario";
+import { createToken } from "../../../context/security/auth";
 
 const usuariosRepository: UsuarioRepository = new UsuarioRepositoryPostgres();
 
@@ -33,7 +34,10 @@ router.post("/login", async (req: Request, res: Response) => {
     password,
   };
   const usuario: Usuario = await usuariosUseCases.login(usuarioAPI);
-  res.json({ mensaje: "Login correcto" });
+  if (usuario === null)
+    res.status(404).json({ mensaje: "Usuario no encontrado" });
+  const token = createToken(usuario);
+  res.json({ token });
 });
 
 export default router;
