@@ -16,7 +16,7 @@ const cosasUseCases = new CosasUseCases(cosasRepository);
 const router = express.Router();
 
 router.post("/", isAuth, async (req: Request, res: Response) => {
-  const { nombre, descripcion } = req.body;
+  const { nombre } = req.body;
   const usuario: Usuario = {
     alias: req.body.alias,
   };

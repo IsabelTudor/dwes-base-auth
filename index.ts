@@ -7,9 +7,14 @@ import routerCosas from "./cosas/infrastructure/rest/cosas.rest";
 
 dotenv.config();
 const port = process.env.PORT;
+const allowedOrigins = ["http://localhost:5173"];
+const options: cors.CorsOptions = {
+  origin: allowedOrigins,
+};
 
 const app = express();
 app.use(express.json());
+app.use(cors(options));
 
 //routers
 const api = "api/";
