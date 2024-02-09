@@ -26,7 +26,7 @@ router.post("/", isAuth, async (req: Request, res: Response) => {
   };
 
   await cosasUseCases.save(cosaAPI);
-  res.send("cosa guardada");
+  res.json({ message: "cosa guardada" });
 });
 
 router.get("/", isAuth, async (req: Request, res: Response) => {
